@@ -35,14 +35,15 @@ function draw()
     image(video, 0,0,500,500);
     if(status != "")
     {
-        for(i=0; i < objects.length; i++)
+        objectDetector.detect(video,gotResults);
+        for(i=0; i<objects.length; i++)
         {
-            document.getElementById("status").innerHTML = "Status : Object Detected";
+            document.getElementById("status").innerHTML = "Status : Detecting Objects";
             fill("#FFC300");
+            text(objects[i].label + " " + objects[i].confidence*100 + "%", objects[i].x+15, objects[i].y+15);
             noFill();
             stroke("#FFC300");
-            text(objects[i].label + " " + objects[i].confidence * 100 + objects[i].x + 15, objects[i].y + 15);
-            rect(objects[i].x + 15, objects[i].y + 15, objects[i].width, objects[i].height)
+            rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height);
         }
     }
 }
